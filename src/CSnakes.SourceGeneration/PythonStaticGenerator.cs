@@ -137,13 +137,13 @@ public class PythonStaticGenerator : IIncrementalGenerator
                 private class {{pascalFileName}}Internal : I{{pascalFileName}}
                 {
                     private PyObject module;
-                    private readonly ILogger<IPythonEnvironment>? logger;
+                    private readonly ILogger? logger;
 
             {{      Lines(IndentationLevel.Two,
                           from f in functionNames
                           select $"private PyObject {f.Field};") }}
 
-                    internal {{pascalFileName}}Internal(ILogger<IPythonEnvironment>? logger)
+                    internal {{pascalFileName}}Internal(ILogger? logger)
                     {
                         this.logger = logger;
                         using (GIL.Acquire())

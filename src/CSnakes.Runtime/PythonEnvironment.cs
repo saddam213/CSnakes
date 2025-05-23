@@ -16,7 +16,7 @@ namespace CSnakes.Runtime;
 
 internal class PythonEnvironment : IPythonEnvironment
 {
-    public ILogger<IPythonEnvironment>? Logger { get; private set; }
+    public ILogger? Logger { get; private set; }
 
     private readonly CPythonAPI api;
     private bool disposedValue;
@@ -24,7 +24,7 @@ internal class PythonEnvironment : IPythonEnvironment
     private static IPythonEnvironment? pythonEnvironment;
     private readonly static Lock locker = new();
 
-    public static IPythonEnvironment GetPythonEnvironment(IEnumerable<PythonLocator> locators, IEnumerable<IPythonPackageInstaller> packageInstallers, PythonEnvironmentOptions options, ILogger<IPythonEnvironment>? logger, IEnvironmentManagement? environmentManager = null)
+    public static IPythonEnvironment GetPythonEnvironment(IEnumerable<PythonLocator> locators, IEnumerable<IPythonPackageInstaller> packageInstallers, PythonEnvironmentOptions options, ILogger? logger = null, IEnvironmentManagement? environmentManager = null)
     {
         if (pythonEnvironment is null)
         {
@@ -40,7 +40,7 @@ internal class PythonEnvironment : IPythonEnvironment
         IEnumerable<PythonLocator> locators,
         IEnumerable<IPythonPackageInstaller> packageInstallers,
         PythonEnvironmentOptions options,
-        ILogger<IPythonEnvironment>? logger,
+        ILogger? logger,
         IEnvironmentManagement? environmentManager = null)
     {
         Logger = logger;
