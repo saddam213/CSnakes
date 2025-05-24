@@ -21,6 +21,8 @@ public interface IPyBuffer
     /// </summary>
     bool IsScalar { get; }
 
+    ReadOnlySpan<nint> Shape { get; }
+
     /// <summary>
     /// Gets the item type of the values in the buffer. 
     /// </summary>

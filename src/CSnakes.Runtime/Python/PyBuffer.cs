@@ -79,7 +79,7 @@ internal sealed class PyBuffer : IPyBuffer, IDisposable
 
     public int Dimensions => _buffer.ndim == 0 ? 1 : _buffer.ndim;
 
-    private unsafe ReadOnlySpan<nint> Shape
+    public unsafe ReadOnlySpan<nint> Shape
     {
         get
         {
@@ -209,14 +209,14 @@ internal sealed class PyBuffer : IPyBuffer, IDisposable
             throw new InvalidOperationException("Buffer is read-only, use the AsReadOnlySpan method.");
         }
         ValidateBufferCommon<T>();
-        EnsureScalar();
+        //EnsureScalar();
         return new Span<T>((void*)_buffer.buf, (int)(Length / sizeof(T)));
     }
 
     private unsafe ReadOnlySpan<T> AsReadOnlySpanInternal<T>() where T : unmanaged
     {
         ValidateBufferCommon<T>();
-        EnsureScalar();
+        //EnsureScalar();
         return new ReadOnlySpan<T>((void*)_buffer.buf, (int)(Length / sizeof(T)));
     }
 
