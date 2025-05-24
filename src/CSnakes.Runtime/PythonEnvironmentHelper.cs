@@ -14,6 +14,6 @@ public class PythonEnvironmentHelper
         var packageInstaller = new PipInstaller(logger, requirements);
         var environmentOptions = new PythonEnvironmentOptions(modulePath, []);
         var environmentManager = new VenvEnvironmentManagement(logger, environmentPath, true);
-        return PythonEnvironment.GetPythonEnvironment([pythonLocator], [packageInstaller], environmentOptions, logger, environmentManager);
+        return new PythonEnvironment([pythonLocator], [packageInstaller], environmentOptions, logger, environmentManager);
     }
 }

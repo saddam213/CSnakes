@@ -21,22 +21,7 @@ internal class PythonEnvironment : IPythonEnvironment
     private readonly CPythonAPI api;
     private bool disposedValue;
 
-    private static IPythonEnvironment? pythonEnvironment;
-    private readonly static Lock locker = new();
-
-    public static IPythonEnvironment GetPythonEnvironment(IEnumerable<PythonLocator> locators, IEnumerable<IPythonPackageInstaller> packageInstallers, PythonEnvironmentOptions options, ILogger? logger = null, IEnvironmentManagement? environmentManager = null)
-    {
-        if (pythonEnvironment is null)
-        {
-            lock (locker)
-            {
-                pythonEnvironment ??= new PythonEnvironment(locators, packageInstallers, options, logger, environmentManager);
-            }
-        }
-        return pythonEnvironment;
-    }
-
-    private PythonEnvironment(
+    internal PythonEnvironment(
         IEnumerable<PythonLocator> locators,
         IEnumerable<IPythonPackageInstaller> packageInstallers,
         PythonEnvironmentOptions options,
@@ -120,16 +105,6 @@ internal class PythonEnvironment : IPythonEnvironment
             if (disposing)
             {
                 api.Dispose();
-                if (pythonEnvironment is not null)
-                {
-                    lock (locker)
-                    {
-                        if (pythonEnvironment is not null)
-                        {
-                            pythonEnvironment = null;
-                        }
-                    }
-                }
             }
 
             disposedValue = true;

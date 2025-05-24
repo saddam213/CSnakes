@@ -113,6 +113,14 @@ public static class GIL
         handlesToDispose.Enqueue(handle);
     }
 
+    internal static void Reset()
+    {
+        currentState.Dispose();
+        currentState = null;
+        pythonThreadState = 0;
+        Debug.WriteLine($"****** Resesting ThreadState with Python on thread {CPythonAPI.GetNativeThreadId()}");
+    }
+
     public static bool IsAcquired => currentState is { RecursionCount: > 0 };
 
     internal static void Require()

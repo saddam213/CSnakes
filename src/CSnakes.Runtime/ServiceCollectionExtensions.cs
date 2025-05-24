@@ -32,9 +32,8 @@ public static partial class ServiceCollectionExtensions
 
             var options = envBuilder.GetOptions();
 
-            return PythonEnvironment.GetPythonEnvironment(locators, installers, options, logger, environmentManager);
+            return new PythonEnvironment(locators, installers, options, logger, environmentManager);
         });
-
         return pythonBuilder;
     }
 
